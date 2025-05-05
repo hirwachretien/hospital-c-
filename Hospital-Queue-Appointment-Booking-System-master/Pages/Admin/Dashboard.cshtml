@@ -1,0 +1,91 @@
+﻿@page
+@model HospitalFlowSystem.Pages.Admin.DashboardModel
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<style>
+    body {
+        min-height: 100vh;
+        display: flex;
+    }
+
+    .sidebar {
+        width: 250px;
+        background-color: #0d6efd;
+        color: white;
+        padding: 20px;
+    }
+
+        .sidebar a {
+            color: white;
+            display: block;
+            margin: 10px 0;
+            text-decoration: none;
+        }
+
+            .sidebar a:hover {
+                background-color: #0b5ed7;
+                padding-left: 8px;
+                border-radius: 4px;
+            }
+
+    .content {
+        flex: 1;
+        padding: 20px;
+        background-color: #f8f9fa;
+    }
+
+    .card-stat {
+        min-height: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+
+<div class="sidebar">
+    <h4>Admin Panel</h4>
+    <hr />
+    <a href="/Admin/Dashboard">🏠 Dashboard</a>
+    <a href="ManageDoctors">👨‍⚕️ Manage Doctors</a>
+    <a href="/Admin/ManageClinics">🏥 Manage Clinics</a>
+    <a href="/Admin/ManageDepartments">📁 Manage Departments</a>
+    <a href="#">📊 Reports</a>
+    <a href="/Account/Login">🔓 Logout</a>
+</div>
+
+<div class="content">
+    <h2>Welcome, Admin!</h2>
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card card-stat text-white bg-primary mb-3 shadow">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Doctors</h5>
+                    <p class="card-text fs-4">@Model.DoctorCount</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card card-stat text-white bg-success mb-3 shadow">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Patients</h5>
+                    <p class="card-text fs-4">@Model.PatientCount</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card card-stat text-white bg-warning mb-3 shadow">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Appointments</h5>
+                    <p class="card-text fs-4">@Model.AppointmentCount</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,47 @@
+﻿@page "{id:int}"
+@model HospitalFlowSystem.Pages.Admin.EditClinicModel
+@{
+    ViewData["Title"] = "Edit Clinic";
+}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<div class="container mt-5">
+    <h2 class="mb-4">Edit Clinic</h2>
+
+    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+    {
+        <div class="alert alert-danger">@Model.ErrorMessage</div>
+    }
+
+    @if (!string.IsNullOrEmpty(Model.SuccessMessage))
+    {
+        <div class="alert alert-success">@Model.SuccessMessage</div>
+    }
+
+    <form method="post">
+        <input type="hidden" asp-for="ClinicID" />
+        <div class="mb-3">
+            <label class="form-label">Clinic Name</label>
+            <input type="text" class="form-control" asp-for="ClinicName" required />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Location</label>
+            <input type="text" class="form-control" asp-for="Location" required />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" asp-for="ContactEmail" required />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Phone</label>
+            <input type="text" class="form-control" asp-for="Phone" required />
+        </div>
+
+        <button type="submit" class="btn btn-success">Update Clinic</button>
+        <a href="/Admin/ManageClinics" class="btn btn-secondary ms-2">Cancel</a>
+    </form>
+</div>

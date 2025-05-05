@@ -1,0 +1,105 @@
+﻿@page
+@model HospitalFlowSystem.Pages.Admin.ManageDoctorsModel
+@{
+    ViewData["Title"] = "Manage Doctors";
+}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<div class="container mt-5">
+    <h2 class="mb-4">Manage Doctors</h2>
+
+    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+    {
+        <div class="alert alert-danger">@Model.ErrorMessage</div>
+    }
+
+    @if (!string.IsNullOrEmpty(Model.SuccessMessage))
+    {
+        <div class="alert alert-success">@Model.SuccessMessage</div>
+    }
+
+    <!-- Add Doctor Form -->
+    <form method="post">
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label class="form-label">Full Name</label>
+                <input type="text" name="Name" class="form-control" required />
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" name="Email" class="form-control" required />
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" name="Password" class="form-control" required />
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <label class="form-label">Department</label>
+                <select name="DepartmentID" class="form-select" required>
+                    <option value="">-- Select Department --</option>
+                    @foreach (var dept in Model.Departments)
+                    {
+                        <option value="@dept.DepartmentID">@dept.Name (@dept.ClinicName)</option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-md-6 d-grid mb-4">
+                <button type="submit" class="btn btn-primary">Add Doctor</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- Doctor Table -->
+    @if (Model.Doctors.Any())
+    {
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Department</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Doctors.Count; i++)
+                {
+                    <tr>
+                        <td>@(i + 1)</td>
+                        <td>@Model.Doctors[i].Name</td>
+                        <td>@Model.Doctors[i].Email</td>
+                        <td>@Model.Doctors[i].Department</td>
+                        <td>
+                            <a class="btn btn-sm btn-outline-primary me-2"
+                               asp-page="/Admin/EditDoctor"
+                               asp-route-id="@Model.Doctors[i].UserID">Edit</a>
+
+                            <form method="post"
+                                  asp-page-handler="Delete"
+                                  asp-route-id="@Model.Doctors[i].UserID"
+                                  style="display:inline;">
+                                <button type="submit"
+                                        class="btn btn-sm btn-outline-danger"
+                                        onclick="return confirm('Are you sure you want to delete this doctor?')">
+                                    Delete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-info">No doctors found.</div>
+    }
+
+    <a href="/Admin/Dashboard" class="btn btn-secondary mt-4">← Back to Dashboard</a>
+</div>

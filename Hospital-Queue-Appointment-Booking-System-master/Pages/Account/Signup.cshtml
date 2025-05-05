@@ -1,0 +1,83 @@
+﻿@page
+@model HospitalFlowSystem.Pages.Account.SignupModel
+@{
+    ViewData["Title"] = "Patient Signup";
+}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0 rounded-3">
+                <div class="card-body p-4">
+                    <h3 class="text-center mb-4">Patient Signup</h3>
+
+                    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @Model.ErrorMessage
+                        </div>
+                    }
+
+                    @if (!string.IsNullOrEmpty(Model.SuccessMessage))
+                    {
+                        <div class="alert alert-success d-flex align-items-center" role="alert">
+                            <div class="spinner-border spinner-border-sm me-2" role="status"></div>
+                            @Model.SuccessMessage
+                        </div>
+
+                        <script>
+                            setTimeout(function () {
+                                window.location.href = "/Account/Login";
+                            }, 3000);
+                        </script>
+                    }
+
+                    <form method="post">
+                        <div class="form-group mb-3">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" name="Name" class="form-control" required />
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" name="Email" class="form-control" required />
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" name="Password" class="form-control" required />
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="confirmPassword" class="form-label">Confirm Password</label>
+                            <input type="password" name="ConfirmPassword" class="form-control" required />
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="contactInfo" class="form-label">Contact Info</label>
+                            <input type="text" name="ContactInfo" class="form-control" required />
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="city" class="form-label">City of Residence</label>
+                            <input type="text" name="City" class="form-control" required />
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label for="dob" class="form-label">Date of Birth</label>
+                            <input type="date" name="DateOfBirth" class="form-control" required />
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">Create Account</button>
+
+                        <div class="text-center mt-3">
+                            <small class="text-muted">Already have an account? <a href="/Account/Login">Login</a></small>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
